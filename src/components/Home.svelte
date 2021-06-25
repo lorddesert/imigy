@@ -32,7 +32,7 @@
 <main>
 	<h1>Hello {name}!</h1>
   <button on:click={setShowGallery}>
-    All images
+    My collection
   </button>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 

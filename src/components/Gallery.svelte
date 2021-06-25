@@ -32,23 +32,32 @@
     <figcaption>my personal collection image</figcaption>
   </figure>
 {:else}
-  <p>Loading _>:P)...</p>
+  <p id="loader">Loading _>:P)...</p>
 {/each}
 <!-- this block renders when photos.length === 0 -->
 
 <style>
 
+  #loader {
+    display: grid;
+    place-items: center;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    font-size: 3rem;
+  }
   img {
     max-width: 100%;
     padding: 2em 0;
   }
   figure {
     text-align: center;
+    margin-bottom: 3em;
+    border: 2px solid #ccc;
+    padding: 1em 0;
   }
   figcaption {
-    padding: 2em 0;
+    font-size: 1.3rem;
   }
-
-
 
 </style>

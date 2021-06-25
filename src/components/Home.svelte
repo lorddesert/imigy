@@ -45,7 +45,9 @@
   />
   
   <button class="primary" on:click={fileCLick}>Upload <strong>IMG</strong></button>
-  <img src={currentImage ? currentImage : "#"} alt="Something maybe">
+  {#if currentImage}
+    <img src={currentImage} alt="Something maybe"> 
+  {/if}
   <!-- Validate the files in the server.  -->
 </main>
 

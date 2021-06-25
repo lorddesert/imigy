@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
 
   // State
+  export let setShowGallery
   let images = []
 
   let imagesRef = firebase.storage().ref().child('images/images/')
@@ -26,6 +27,7 @@
   })
 </script>
 
+<button on:click={setShowGallery}>Return home</button>
 {#each images as img}
   <figure>
     <img src={img} alt="something nice and pretty">

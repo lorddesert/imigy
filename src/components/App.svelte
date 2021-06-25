@@ -10,7 +10,9 @@
 </script>
 
 {#if showGallery}
-<Gallery />
+  <Gallery 
+    {setShowGallery} 
+  />
 {:else}
   <Home 
     {setShowGallery} 

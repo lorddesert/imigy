@@ -36,6 +36,7 @@
     <Home 
       {setShowGallery}
       {closeSession}
+      {uid}
     />
   {/if}
 

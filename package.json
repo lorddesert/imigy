@@ -1,6 +1,7 @@
 {
   "name": "imigy",
-  "version": "0.0.3",
+  "description": "Imigy is an app where you can upload and share images with the community",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "build": "rollup -c",

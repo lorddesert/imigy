@@ -3,9 +3,10 @@
 
   // State
   export let setShowGallery
+  export let uid
   let images = []
 
-  let imagesRef = firebase.storage().ref().child('images/images/')
+  let imagesRef = firebase.storage().ref().child(`images/${uid}/`)
 
   async function listImages () {
     try {
@@ -30,7 +31,7 @@
 <button on:click={setShowGallery}>Return home</button>
 {#each images as img}
   <figure>
-    <img src={img} alt="something nice and pretty">
+    <img src={img} alt="something nice and pretty" loading="lazy">
     <figcaption>my personal collection image</figcaption>
   </figure>
 {:else}

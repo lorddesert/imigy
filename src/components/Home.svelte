@@ -3,9 +3,8 @@
     import saveImage from '../services/saveImage.js'
   
     // State
-    export let name
     export let setShowGallery
-
+    export let closeSession
   
     let storage = firebase.storage()
     let imageStorage = storage.ref('images/')
@@ -22,7 +21,9 @@
   
       currentImage = window.URL.createObjectURL(e.target.files[0])
       console.log(currentImage)
-      await saveImage(imageStorage, file)
+
+ 
+      await saveImage(imageStorage, file, uid)
     }
   
 
@@ -30,10 +31,15 @@
   </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-  <button on:click={setShowGallery}>
-    My collection
-  </button>
+	<h1>Hello man!</h1>
+  <div>
+    <button on:click={setShowGallery}>
+      My collection
+    </button>
+    <button on:click={closeSession} style="color:firebrick; border-color: firebrick">
+      Close session
+    </button>
+  </div>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 
   <input 

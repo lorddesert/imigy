@@ -24,6 +24,7 @@
 
   onMount(async () => {
     await listImages()
+    console.log(uid)
     console.log('finished', images)
   })
 </script>

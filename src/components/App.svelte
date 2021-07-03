@@ -9,8 +9,15 @@
   const auth = firebase.auth()
 
   onMount(async () => {
-        uid = window.localStorage.getItem('uid')
+        const thereIsUid = window.localStorage.getItem('uid')
+
+        if (thereIsUid) {
+          setUid(thereIsUid) 
+        } else if(auth.currentUser) {
+          setUid(auth.currentUser.uid)
+        }
     
+        console.assert(uid, 'finding uid')
   })
 
   function setShowGallery() {
@@ -30,7 +37,8 @@
 
   {#if showGallery}
     <Gallery 
-      {setShowGallery} 
+      {setShowGallery}
+      {uid}
     />
   {:else}
     <Home 

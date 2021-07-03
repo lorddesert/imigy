@@ -1,18 +1,31 @@
 <script>
+import { onMount } from "svelte";
+
+
+    // export let setUserIsOnline
+    export let setUid
+
     let showLogin = true
     let passwordInput = "password"
 
     const auth = firebase.auth();
 
+
     async function login(e) {
         try {
             e.preventDefault()
+
+            const rememberMe = e.target[3].checked;
             const email = e.target[0].value
             const password = e.target[1].value
-
+            
             await auth.signInWithEmailAndPassword(email, password)
 
+            if (rememberMe) window.localStorage.setItem('uid', auth.currentUser.uid)
+
             alert("Signed up perfectly!!!!")
+            setUid(auth.currentUser.uid)
+
             
         } catch (error) {
             switch (error.code) {
@@ -44,12 +57,18 @@
     async function register(e) {
         try {
             e.preventDefault()
+
+            const rememberMe = e.target[3].checked;
             const email = e.target[0].value
             const password = e.target[1].value
     
            await auth.createUserWithEmailAndPassword(email, password)
+           if (rememberMe) window.localStorage.setItem('uid', auth.currentUser.uid)
+
 
            alert('Registered succesfully!')
+           setUid(auth.currentUser.uid)
+
         } catch (error) {
             switch (error.code) {
 
@@ -78,31 +97,41 @@
     }
 
     let changeForm = () => showLogin = !showLogin
-    let changeInputType = () => passwordInput === "password" ? passwordInput = "text" :  passwordInput = "password"
+    let changePasswordType = () => passwordInput === "password" ? passwordInput = "text" :  passwordInput = "password"
+
 </script>
 {#if !showLogin}
-    <form action="" on:submit={register}>
+    <form action="" method="POST" on:submit={register}>
+        <h1>Imigy</h1>
         <label for="username">Email</label>
         <input type="text" name="username"/>
         <label for="password">Password</label>
         <input type={`${passwordInput}`} name="password"/>
         <div class="password-container">
-            <input type="checkbox" name="check" id="checkbox" on:change={changeInputType}>
+            <input type="checkbox" name="check" on:change={changePasswordType}>
             <label for="check">Show password</label>
         </div>
-
-            <button type="submit">Register</button>
-            <a  href="#" on:click={changeForm}>Already have an account?</a>
+        <div class="password-container">
+            <input type="checkbox" name="check" on:change={changePasswordType}>
+            <label for="check">Remember me</label>
+        </div>
+        <button type="submit">Register</button>
+        <a  href="#" on:click={changeForm}>Already have an account?</a>
     </form>
 {:else}
     <form action="" on:submit={login}>
+        <h1>Imigy</h1>
         <label for="username">Email</label>
         <input type="text" name="username"/>
         <label for="password">Password</label>
         <input type={`${passwordInput}`} name="password"/>
         <div class="password-container">
-            <input type="checkbox" name="check" id="checkbox" on:change={changeInputType}>
+            <input type="checkbox" name="check" on:change={changePasswordType}>
             <label for="check">Show password</label>
+        </div>
+        <div class="password-container">
+            <input type="checkbox" name="check" on:change={changePasswordType}>
+            <label for="check">Remember me</label>
         </div>
         <button type="submit">Login</button>
         <a href="#" on:click={changeForm}>Don't have an account?</a>
@@ -110,6 +139,11 @@
 {/if}
 
 <style>
+    h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        color: crimson;
+    }
 
     form {
         display: grid;

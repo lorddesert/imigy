@@ -5,6 +5,7 @@
     // State
     export let setShowGallery
     export let closeSession
+    export let uid
   
     let storage = firebase.storage()
     let imageStorage = storage.ref('images/')

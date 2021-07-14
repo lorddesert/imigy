@@ -17,7 +17,6 @@
           setUid(auth.currentUser.uid)
         }
     
-        console.assert(uid, 'finding uid')
   })
 
   function setShowGallery() {

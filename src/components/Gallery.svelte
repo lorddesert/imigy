@@ -12,8 +12,15 @@
     try {
       let res = await imagesRef.listAll()
       res.items.forEach( async itemRef => {
-        let imgURL = await itemRef.getDownloadURL()
-        images = [...images, imgURL]
+        let img = {}
+
+        let regex = /(.\w{3,}$)/
+        let name = itemRef.name.replace(regex, '')
+        name = name.replace(/(-|_)/g, ' ')
+        img.name = name
+        img.URL = await itemRef.getDownloadURL()
+
+        images = [...images, img]
       });
       images = images
     } catch (error) {
@@ -24,16 +31,14 @@
 
   onMount(async () => {
     await listImages()
-    console.log(uid)
-    console.log('finished', images)
   })
 </script>
 
 <button on:click={setShowGallery}>Return home</button>
 {#each images as img}
   <figure>
-    <img src={img} alt="something nice and pretty" loading="lazy">
-    <figcaption>my personal collection image</figcaption>
+    <img src={img.URL} alt={`${img.name}`} loading="lazy">
+    <figcaption>{img.name}</figcaption>
   </figure>
 {:else}
   <p id="loader">Loading _>:P)...</p>
@@ -54,14 +59,28 @@
     max-width: 100%;
     padding: 2em 0;
   }
+  
   figure {
-    text-align: center;
-    margin-bottom: 3em;
-    border: 2px solid #ccc;
+    display: grid;
+    place-items: center;
+    margin: 0 auto;
     padding: 1em 0;
   }
   figcaption {
     font-size: 1.3rem;
   }
 
+@media screen and (max-width: 480px) {
+  img {
+    max-width: 100%;
+  }
+
+  figure {
+    margin: 0 !important;
+  }
+
+  img:not(:last-of-type) {
+    margin-bottom: 2em;
+  }
+}
 </style>

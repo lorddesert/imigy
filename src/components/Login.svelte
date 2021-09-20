@@ -100,23 +100,32 @@ import { onMount } from "svelte";
     let changePasswordType = () => passwordInput === "password" ? passwordInput = "text" :  passwordInput = "password"
 
 </script>
+
 {#if !showLogin}
-    <form action="" method="POST" on:submit={register}>
+    <form method="POST" on:submit={register}>
         <h1>Imigy</h1>
-        <label for="username">Email</label>
-        <input type="text" name="username"/>
-        <label for="password">Password</label>
-        <input type={`${passwordInput}`} name="password"/>
-        <div class="password-container">
+        <section>
+            <label for="username">Email</label>
+            <input type="text" name="username"/>
+        </section>
+
+        <section>
+            <label for="password">Password</label>
+            <input type={`${passwordInput}`} name="password"/>
+        </section>
+
+        <section class="password-container">
             <input type="checkbox" name="check" on:change={changePasswordType}>
             <label for="check">Show password</label>
-        </div>
-        <div class="password-container">
+        </section>
+
+        <section class="password-container">
             <input type="checkbox" name="check" on:change={changePasswordType}>
             <label for="check">Remember me</label>
-        </div>
+        </section>
+
         <button type="submit">Register</button>
-        <a  href="#" on:click={changeForm}>Already have an account?</a>
+        <button  on:click={changeForm}>Already have an account?</button>
     </form>
 {:else}
     <form action="" on:submit={login}>
@@ -142,7 +151,7 @@ import { onMount } from "svelte";
             <input type="checkbox" name="check" on:change={changePasswordType}>
             <label for="check">Remember me</label>
         </section>
-        
+
         <button type="submit">Login</button>
         <button on:click={changeForm}>Don't have an account?</button>
     </form>

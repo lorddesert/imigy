@@ -47,6 +47,8 @@ button {
 	color: #333;
 	background-color: #f4f4f4;
 	outline: none;
+	transition: all 100ms;
+
 }
 
 button:disabled {
@@ -59,4 +61,8 @@ button:not(:disabled):active {
 
 button:focus {
 	border-color: #666;
+}
+
+button:active {
+transform: scale(97%);
 }

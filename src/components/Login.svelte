@@ -106,7 +106,7 @@ import { onMount } from "svelte";
         <h1>Imigy</h1>
         <section>
             <label for="username">Email</label>
-            <input type="text" name="username"/>
+            <input type="text" name="username" autocomplete="email"/>
         </section>
 
         <section>

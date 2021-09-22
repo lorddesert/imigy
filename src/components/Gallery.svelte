@@ -4,6 +4,7 @@
   // State
   export let setShowGallery
   export let uid
+  export let setShowGlobalFeed
   let images = []
 
   let imagesRef = firebase.storage().ref().child(`images/${uid}/`)
@@ -29,12 +30,21 @@
     }
   }
 
+  function returnHome() {
+    if(uid === "global") setShowGlobalFeed()
+    else setShowGallery()
+    
+  }
+
   onMount(async () => {
     await listImages()
+
+    console.log(uid)
   })
 </script>
 
-<button on:click={setShowGallery}>Return home</button>
+<button on:click={returnHome}>Return home</button>
+
 {#each images as img}
   <figure>
     <img src={img.URL} alt={`${img.name}`} loading="lazy">
@@ -43,6 +53,8 @@
 {:else}
   <p id="loader">Loading _>:P)...</p>
 {/each}
+
+
 <!-- this block renders when photos.length === 0 -->
 
 <style>

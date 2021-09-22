@@ -40,7 +40,12 @@
 {#if uid}
 
   {#if showGlobalFeed}
-    <GlobalFeed />
+    <Gallery 
+      {showGlobalFeed}
+      {setShowGallery}
+      {setShowGlobalFeed}
+      uid = "global"
+    />
 
   {:else if showGallery}
     <Gallery 
@@ -51,10 +56,11 @@
   {:else}
     <Home 
       {setShowGallery}
+      {setShowGlobalFeed}
       {closeSession}
       {uid}
     />
-    
+
   {/if}
 
   {:else}

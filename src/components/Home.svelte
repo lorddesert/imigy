@@ -6,6 +6,7 @@
     export let setShowGallery
     export let closeSession
     export let uid
+    export let setShowGlobalFeed
   
     let storage = firebase.storage()
     let imageStorage = storage.ref('images/')
@@ -39,7 +40,7 @@
       My collection
     </button>
 
-    <button on:click={setShowGallery}>
+    <button on:click={setShowGlobalFeed}>
       Global feed
     </button>
 

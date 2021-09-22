@@ -5,6 +5,7 @@
   import Login from './Login.svelte'
   
   export let showGallery = false
+  export let showGlobalFeed = false
   export let uid = ''
   const auth = firebase.auth()
 
@@ -12,7 +13,7 @@
         const thereIsUid = window.localStorage.getItem('uid')
 
         if (thereIsUid) {
-          setUid(thereIsUid) 
+          setUid(thereIsUid) // This is bad nomenclature. Sorry.
         } else if(auth.currentUser) {
           setUid(auth.currentUser.uid)
         }
@@ -21,6 +22,10 @@
 
   function setShowGallery() {
     showGallery = !showGallery
+  }
+  
+  function setShowGlobalFeed() {
+    showGlobalFeed = !showGlobalFeed
   }
 
   function closeSession() {
@@ -34,17 +39,22 @@
 </script>
 {#if uid}
 
-  {#if showGallery}
+  {#if showGlobalFeed}
+    <GlobalFeed />
+
+  {:else if showGallery}
     <Gallery 
       {setShowGallery}
       {uid}
     />
+
   {:else}
     <Home 
       {setShowGallery}
       {closeSession}
       {uid}
     />
+    
   {/if}
 
   {:else}

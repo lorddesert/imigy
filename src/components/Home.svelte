@@ -33,14 +33,21 @@
 
 <main>
 	<h1>Hello man!</h1>
+
   <div>
     <button on:click={setShowGallery}>
       My collection
     </button>
+
+    <button on:click={setShowGallery}>
+      Global feed
+    </button>
+
     <button on:click={closeSession} style="color:firebrick; border-color: firebrick">
       Close session
     </button>
   </div>
+  
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 
   <input 
@@ -52,6 +59,7 @@
   />
   
   <button class="primary" on:click={fileCLick}>Upload <strong>IMG</strong></button>
+  <button class="primary" on:click={fileCLick}>Upload <strong>IMG</strong> to the global profile</button>
   {#if currentImage}
     <img src={currentImage} alt="Something maybe"> 
   {/if}

@@ -32,6 +32,16 @@
       // We need to finish the global post feed upload.
       await saveImage(imageStorage, file, uploadTarget)
     }
+
+    async function uploadGlobalImage(e) {
+      try {
+        await uploadImage(e, true);
+        
+      } catch (error) {
+        console.log(error)
+        alert('Ups, something went wrong!');
+      }
+    }
   
 
   // lordvlaim
@@ -69,7 +79,7 @@
     type="file" 
     accept="image/*" 
     style="display: none;"
-    on:change={e => uploadImage(e, true)}
+    on:change={uploadGlobalImage}
   />
   
   <button class="primary" on:click={galleryUpload}>Upload <strong>IMG</strong></button>

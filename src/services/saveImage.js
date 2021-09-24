@@ -1,5 +1,8 @@
-export default async function saveImage(ref, file, uid) {
+export default async function saveImage(ref, file, uid, global = false) {
   try {
+
+      if (global) uid = "global"
+
       await ref.child(`/${uid}/${file.name}`).put(file)
 
       console.log('File uploaded!');

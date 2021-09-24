@@ -6,6 +6,10 @@
   export let uid
   export let setShowGlobalFeed
   let images = []
+  let title = {
+    gallery: "My Gallery",
+    global: "Global Feed"
+  }
 
   let imagesRef = firebase.storage().ref().child(`images/${uid}/`)
 
@@ -24,6 +28,7 @@
         images = [...images, img]
       });
       images = images
+
     } catch (error) {
       console.log(error)
       alert('Ups, something happened, come and see the console!')
@@ -36,15 +41,22 @@
     
   }
 
+  /* This doesn't work properly xD */
+  async function checkIfThereIsImages() {
+    if (!images.length) document.querySelector("#loader").innerHTML = "Nothing here, empty ^^"
+
+  }
+
   onMount(async () => {
     await listImages()
+    await checkIfThereIsImages()
 
-    console.log(uid)
   })
 </script>
 
 <button on:click={returnHome}>Return home</button>
 
+<h1>{uid === "global" ? title.global : title.gallery}</h1>
 {#each images as img}
   <figure>
     <img src={img.URL} alt={`${img.name}`} loading="lazy">
@@ -58,6 +70,10 @@
 <!-- this block renders when photos.length === 0 -->
 
 <style>
+
+  h1 {
+    text-align: center;
+  }
 
   #loader {
     display: grid;

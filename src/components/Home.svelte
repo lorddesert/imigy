@@ -14,18 +14,23 @@
     let currentImage
   
   
-    function fileCLick() {
-      document.querySelectorAll('#file')[0].click()
+    function galleryUpload() {
+      document.querySelector('#galleryUpload').click()
+    }
+
+    function globalUpload() {
+      document.querySelector('#globalUpload').click()
     }
   
-    async function changeImage(e) {
+    async function uploadImage(e, uploadToGlobal = false) {
       const file = e.target.files[0]
+      const uploadTarget = uploadToGlobal ? "global" : uid
   
+      /* We show a preview of the image */
       currentImage = window.URL.createObjectURL(e.target.files[0])
-      console.log(currentImage)
 
- 
-      await saveImage(imageStorage, file, uid)
+      // We need to finish the global post feed upload.
+      await saveImage(imageStorage, file, uploadTarget)
     }
   
 
@@ -52,15 +57,24 @@
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 
   <input 
-    id="file" 
+    id="galleryUpload" 
     type="file" 
     accept="image/*" 
     style="display: none;"
-    on:change={changeImage}
+    on:change={uploadImage}
+  />
+
+  <input 
+    id="globalUpload" 
+    type="file" 
+    accept="image/*" 
+    style="display: none;"
+    on:change={e => uploadImage(e, true)}
   />
   
-  <button class="primary" on:click={fileCLick}>Upload <strong>IMG</strong></button>
-  <button class="primary" on:click={fileCLick}>Upload <strong>IMG</strong> to the global profile</button>
+  <button class="primary" on:click={galleryUpload}>Upload <strong>IMG</strong></button>
+  <button class="primary" on:click={globalUpload}>Upload <strong>IMG</strong> to the global profile</button>
+  
   {#if currentImage}
     <img src={currentImage} alt="Something maybe"> 
   {/if}

@@ -120,7 +120,7 @@ import { onMount } from "svelte";
         </section>
 
         <section class="password-container">
-            <input type="checkbox" name="check" on:change={changePasswordType}>
+            <input type="checkbox" name="check" />
             <label for="check">Remember me</label>
         </section>
 

@@ -132,10 +132,6 @@
     max-width: 100%;
   }
 
-  .orange {
-    background: var(--orange)
-  }
-
   /* The switch - the box around the slider */
 .switch {
   position: relative;

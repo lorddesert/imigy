@@ -59,13 +59,13 @@
       Global feed
     </button>
 
-    <button class="button is-danger is-rounded control" on:click={closeSession} >
+    <button class="button is-danger is-outlined is-rounded control" on:click={closeSession} >
       Close session
     </button>
   </div>
   
   <div style="display: grid; grid-gap: 1em">
-    <button class="button  is-medium is-primary" on:click={globalUpload}>Upload to the global feed</button>
+    <button class="button  is-medium is-danger" on:click={globalUpload}>Upload to the global feed</button>
     <button class="button  is-medium " on:click={galleryUpload}>Upload</button>
   </div>
 

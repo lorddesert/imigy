@@ -97,7 +97,7 @@
     display: grid;
     place-items: center;
     min-height: 100vh;
-
+    font-family: 'Dosis', sans-serif;
 	}
 
   img {
@@ -105,10 +105,10 @@
   }
 
 	h1 {
-		color: #ff3e00;
+		color: var(--font-color);
 		text-transform: uppercase;
 		font-size: 4em;
-		font-weight: 100;
+		font-weight: 600;
 	}
 
 </style>

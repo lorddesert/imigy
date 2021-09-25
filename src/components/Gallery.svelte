@@ -93,9 +93,23 @@
     place-items: center;
     margin: 0 auto;
     padding: 1em 0;
+    width: fit-content;
+	  max-width: 70vw;
+    border-radius: 5px;
+
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    padding: 2em;
+    background-color: #fafafa;
+    
+
+  }
+
+  figure:not(:last-child) {
+    margin-bottom: 2em;
   }
   figcaption {
     font-size: 1.3rem;
+    color: var(--card-font-color);
   }
 
 @media screen and (max-width: 480px) {

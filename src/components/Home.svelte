@@ -7,6 +7,7 @@
     export let closeSession
     export let uid
     export let setShowGlobalFeed
+    export let darkTheme
   
     let storage = firebase.storage()
     let imageStorage = storage.ref('images/')
@@ -32,29 +33,54 @@
       // We need to finish the global post feed upload.
       await saveImage(imageStorage, file, uploadTarget)
     }
+
+    async function uploadGlobalImage(e) {
+      try {
+        await uploadImage(e, true);
+        
+      } catch (error) {
+        console.log(error)
+        alert('Ups, something went wrong!');
+      }
+    }
   
 
   // lordvlaim
   </script>
 
 <main>
+
+<!-- Rounded switch -->
+
+<header>
 	<h1>Hello man!</h1>
 
-  <div>
-    <button on:click={setShowGallery}>
+</header>
+
+  <div class="field is-grouped">
+    <button class="button is-rounded control {darkTheme ? "is-dark" : ''}" on:click={setShowGallery}>
       My collection
     </button>
 
-    <button on:click={setShowGlobalFeed}>
+    <button class="button is-rounded control {darkTheme ? "is-dark" : ''}" on:click={setShowGlobalFeed}>
       Global feed
     </button>
 
-    <button on:click={closeSession} style="color:firebrick; border-color: firebrick">
+    <button class="button is-danger is-outlined is-rounded control {darkTheme ? "is-dark" : ''}" on:click={closeSession} >
       Close session
     </button>
   </div>
   
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <div style="display: grid; grid-gap: 1em">
+    <button class="button  is-medium is-danger {darkTheme ? "is-dark" : ''}" on:click={globalUpload}>Upload to the global feed</button>
+    <button class="button  is-medium {darkTheme ? "is-dark" : ''}" on:click={galleryUpload}>Upload</button>
+  </div>
+
+  {#if currentImage}
+    <img src={currentImage} alt="Something maybe"> 
+  {/if}
+  <!-- Validate the files in the server.  -->
+
 
   <input 
     id="galleryUpload" 
@@ -69,16 +95,9 @@
     type="file" 
     accept="image/*" 
     style="display: none;"
-    on:change={e => uploadImage(e, true)}
+    on:change={uploadGlobalImage}
   />
-  
-  <button class="primary" on:click={galleryUpload}>Upload <strong>IMG</strong></button>
-  <button class="primary" on:click={globalUpload}>Upload <strong>IMG</strong> to the global profile</button>
-  
-  {#if currentImage}
-    <img src={currentImage} alt="Something maybe"> 
-  {/if}
-  <!-- Validate the files in the server.  -->
+
 </main>
 
 <style>
@@ -87,18 +106,26 @@
     display: grid;
     place-items: center;
     min-height: 100vh;
-
+    font-family: 'Dosis', sans-serif;
 	}
+
+  header {
+    display: grid;
+    place-items: center end;
+    width: 100%;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  header h1 {
+    grid-column: 2/3;
+  }
+
+  label {
+    margin-right: 2em;
+  }
 
   img {
     max-width: 100%;
   }
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
 
 </style>

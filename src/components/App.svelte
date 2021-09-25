@@ -3,10 +3,13 @@
   import Home from './Home.svelte'
   import Gallery from './Gallery.svelte'
   import Login from './Login.svelte'
+  import ThemeSwitch from './ThemeSwitch.svelte'
   
   export let showGallery = false
   export let showGlobalFeed = false
   export let uid = ''
+  export let darkTheme = false
+
   const auth = firebase.auth()
 
   onMount(async () => {
@@ -36,7 +39,14 @@
 
   const setUid = (newUid) => uid = newUid
 
+  function toggleTheme() {
+    document.querySelector("html").classList.toggle("dark-theme")
+    darkTheme = !darkTheme
+  }
+
 </script>
+
+<ThemeSwitch {toggleTheme} />
 {#if uid}
 
   {#if showGlobalFeed}
@@ -45,12 +55,15 @@
       {setShowGallery}
       {setShowGlobalFeed}
       uid = "global"
+      {darkTheme}
     />
 
   {:else if showGallery}
     <Gallery 
       {setShowGallery}
       {uid}
+      {darkTheme}
+
     />
 
   {:else}
@@ -59,6 +72,7 @@
       {setShowGlobalFeed}
       {closeSession}
       {uid}
+      {darkTheme}
     />
 
   {/if}

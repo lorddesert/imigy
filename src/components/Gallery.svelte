@@ -5,6 +5,8 @@
   export let setShowGallery
   export let uid
   export let setShowGlobalFeed
+  export let darkTheme
+
   let images = []
   let title = {
     gallery: "My Gallery",
@@ -54,9 +56,9 @@
   })
 </script>
 
-<button on:click={returnHome}>Return home</button>
+<button class="button is-rounded is-medium {darkTheme ? "is-dark" : ''}" style="margin: 1em;" on:click={returnHome}>Return home</button>
 
-<h1>{uid === "global" ? title.global : title.gallery}</h1>
+<h1 class="block">{uid === "global" ? title.global : title.gallery}</h1>
 {#each images as img}
   <figure>
     <img src={img.URL} alt={`${img.name}`} loading="lazy">
@@ -93,9 +95,23 @@
     place-items: center;
     margin: 0 auto;
     padding: 1em 0;
+    width: fit-content;
+	  max-width: 70vw;
+    border-radius: 5px;
+
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    padding: 2em;
+    background-color: var(--card-background);
+    
+
+  }
+
+  figure:not(:last-child) {
+    margin-bottom: 2em;
   }
   figcaption {
     font-size: 1.3rem;
+    color: var(--card-font-color);
   }
 
 @media screen and (max-width: 480px) {
@@ -105,6 +121,8 @@
 
   figure {
     margin: 0 !important;
+    max-width: 100%;
+
   }
 
   img:not(:last-of-type) {

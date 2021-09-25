@@ -3,6 +3,7 @@
   import Home from './Home.svelte'
   import Gallery from './Gallery.svelte'
   import Login from './Login.svelte'
+  import ThemeSwitch from './ThemeSwitch.svelte'
   
   export let showGallery = false
   export let showGlobalFeed = false
@@ -35,15 +36,17 @@
     window.localStorage.setItem('uid', '')
     alert("Session closed!\nCome back later!!!")
   }
-  
+
+  const setUid = (newUid) => uid = newUid
+
   function toggleTheme() {
     document.querySelector("html").classList.toggle("dark-theme")
     darkTheme = !darkTheme
   }
 
-  const setUid = (newUid) => uid = newUid
-
 </script>
+
+<ThemeSwitch {toggleTheme} />
 {#if uid}
 
   {#if showGlobalFeed}
@@ -70,7 +73,6 @@
       {closeSession}
       {uid}
       {darkTheme}
-      {toggleTheme}
     />
 
   {/if}

@@ -104,6 +104,7 @@ import { onMount } from "svelte";
 {#if !showLogin}
     <form method="POST" on:submit={register}>
         <h1>Imigy</h1>
+        
         <section class="field">
             <label class="label" for="username">Email</label>
             <input class="control input" type="text" name="username" autocomplete="email"/>
@@ -114,46 +115,53 @@ import { onMount } from "svelte";
             <input class="control input" type={`${passwordInput}`} name="password"/>
         </section>
 
-        <section class="password-container field">
-            <input class="control input" type="checkbox" name="check" on:change={changePasswordType}>
-            <label for="check">Show password</label>
+        <section class="password-container checkbox">
+            <label for="check">
+                <input  type="checkbox" name="check" on:change={changePasswordType}>
+                Show password
+            </label>
         </section>
 
-        <section class="password-container field">
-            <input class="control input" type="checkbox" name="check" />
-            <label class="label" for="check">Remember me</label>
+        <section class="password-container checkbox">
+            <label class="label" for="check">
+                <input  type="checkbox" name="check" />
+                Remember me
+            </label>
         </section>
 
         <button class="button is-medium is-danger" type="submit">Register</button>
-        <button  on:click={changeForm}>Already have an account?</button>
+        <button class="button is-ghost" on:click={changeForm}>Already have an account?</button>
     </form>
 {:else}
-    <form action="" on:submit={login}>
+    <form  action="" on:submit={login}>
         <h1>Imigy</h1>
 
-        <section>
-            <label for="username">Email</label>
-            <input type="text" name="username"/>
-
+        <section class="field">
+            <label class="label" for="username">Email</label>
+            <input class="input control" type="text" name="username"/>
         </section>
 
-        <section>
-            <label for="password">Password</label>
-            <input type={`${passwordInput}`} name="password"/>
+        <section class="field">
+            <label class="label" for="password">Password</label>
+            <input class="input control"  type={`${passwordInput}`} name="password"/>
         </section>
 
-        <section class="password-container">
-            <input type="checkbox" name="check" on:change={changePasswordType}>
-            <label for="check">Show password</label>
+        <section class="password-container checkbox" >
+            <label class="checkbox" for="check">
+                <input  type="checkbox" name="check" on:change={changePasswordType}>
+                Show password
+            </label>
         </section>
 
-        <section class="password-container">
-            <input type="checkbox" name="check" on:change={changePasswordType}>
-            <label for="check">Remember me</label>
+        <section class="password-container checkbox">
+            <label class="checkbox" for="check">
+                <input type="checkbox" name="check" on:change={changePasswordType}>
+                Remember me
+            </label>
         </section>
 
-        <button type="submit">Login</button>
-        <button on:click={changeForm}>Don't have an account?</button>
+        <button class="button is-medium is-danger" type="submit">Login</button>
+        <button class="button is-ghost" on:click={changeForm}>Don't have an account?</button>
     </form>
 {/if}
 
@@ -173,6 +181,16 @@ import { onMount } from "svelte";
     .password-container {
         display: flex;
         grid-gap: .5em;
+    }
+
+    .password-container label {
+        display: flex;
+        align-items: center;
+        gap: .5em;
+    }
+    label {
+        color: var(--font-color);
+        font-weight: 500;
     }
 
     input[type=checkbox] {

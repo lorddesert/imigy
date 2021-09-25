@@ -1,9 +1,19 @@
 :root {
 	--font-color: #333;
 	--card-font-color: #333;
+	--background-color: #fafafa;
 	--font-family: 'Dosis', sans-serif;
 	--orange: #ff3e00;
+	
 }
+
+.dark-theme {
+	--font-color: #fff;
+	--card-font-color: #fff;
+	--card-background: hsl(0, 0%, 10%);
+	--background-color: hsl(0, 0%, 5%);
+}
+
 
 
 html, body {
@@ -13,7 +23,7 @@ html, body {
 }
 
 body {
-	background: #fafafa;
+	background: var(--background-color);
 	/* background-image: linear-gradient( 134.6deg,  rgba(201,37,107,1) 15.4%, rgba(116,16,124,1) 74.7% ); */
 	color: var(--font-color);
 

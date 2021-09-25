@@ -99,7 +99,7 @@
 
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
     padding: 2em;
-    background-color: #fafafa;
+    background-color: var(--card-background);
     
 
   }

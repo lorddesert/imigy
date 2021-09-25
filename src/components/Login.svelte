@@ -104,27 +104,27 @@ import { onMount } from "svelte";
 {#if !showLogin}
     <form method="POST" on:submit={register}>
         <h1>Imigy</h1>
-        <section>
-            <label for="username">Email</label>
-            <input type="text" name="username" autocomplete="email"/>
+        <section class="field">
+            <label class="label" for="username">Email</label>
+            <input class="control input" type="text" name="username" autocomplete="email"/>
         </section>
 
-        <section>
-            <label for="password">Password</label>
-            <input type={`${passwordInput}`} name="password"/>
+        <section class="field">
+            <label class="label" for="password">Password</label>
+            <input class="control input" type={`${passwordInput}`} name="password"/>
         </section>
 
-        <section class="password-container">
-            <input type="checkbox" name="check" on:change={changePasswordType}>
+        <section class="password-container field">
+            <input class="control input" type="checkbox" name="check" on:change={changePasswordType}>
             <label for="check">Show password</label>
         </section>
 
-        <section class="password-container">
-            <input type="checkbox" name="check" />
-            <label for="check">Remember me</label>
+        <section class="password-container field">
+            <input class="control input" type="checkbox" name="check" />
+            <label class="label" for="check">Remember me</label>
         </section>
 
-        <button type="submit">Register</button>
+        <button class="button is-medium is-danger" type="submit">Register</button>
         <button  on:click={changeForm}>Already have an account?</button>
     </form>
 {:else}

@@ -50,16 +50,16 @@
 <main>
 	<h1>Hello man!</h1>
 
-  <div>
-    <button on:click={setShowGallery}>
+  <div class="field is-grouped">
+    <button class="button is-rounded control"on:click={setShowGallery}>
       My collection
     </button>
 
-    <button on:click={setShowGlobalFeed}>
+    <button class="button is-rounded control" on:click={setShowGlobalFeed}>
       Global feed
     </button>
 
-    <button on:click={closeSession} style="color:firebrick; border-color: firebrick">
+    <button class="button is-danger is-rounded control" on:click={closeSession} >
       Close session
     </button>
   </div>
@@ -82,8 +82,8 @@
     on:change={uploadGlobalImage}
   />
   
-  <button class="primary" on:click={galleryUpload}>Upload <strong>IMG</strong></button>
-  <button class="primary" on:click={globalUpload}>Upload <strong>IMG</strong> to the global profile</button>
+  <button class="button" on:click={galleryUpload}>Upload <strong>IMG</strong></button>
+  <button class="button" on:click={globalUpload}>Upload <strong>IMG</strong> to the global profile</button>
   
   {#if currentImage}
     <img src={currentImage} alt="Something maybe"> 
@@ -103,12 +103,5 @@
   img {
     max-width: 100%;
   }
-
-	h1 {
-		color: var(--font-color);
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 600;
-	}
 
 </style>

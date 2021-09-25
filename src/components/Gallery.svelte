@@ -56,7 +56,7 @@
 
 <button on:click={returnHome}>Return home</button>
 
-<h1>{uid === "global" ? title.global : title.gallery}</h1>
+<h1 class="block">{uid === "global" ? title.global : title.gallery}</h1>
 {#each images as img}
   <figure>
     <img src={img.URL} alt={`${img.name}`} loading="lazy">

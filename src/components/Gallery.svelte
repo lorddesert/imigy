@@ -5,6 +5,8 @@
   export let setShowGallery
   export let uid
   export let setShowGlobalFeed
+  export let darkTheme
+
   let images = []
   let title = {
     gallery: "My Gallery",
@@ -54,7 +56,7 @@
   })
 </script>
 
-<button class="button is-rounded is-medium" style="margin: 1em;" on:click={returnHome}>Return home</button>
+<button class="button is-rounded is-medium {darkTheme ? "is-dark" : ''}" style="margin: 1em;" on:click={returnHome}>Return home</button>
 
 <h1 class="block">{uid === "global" ? title.global : title.gallery}</h1>
 {#each images as img}
@@ -119,6 +121,8 @@
 
   figure {
     margin: 0 !important;
+    max-width: 100%;
+
   }
 
   img:not(:last-of-type) {

@@ -7,6 +7,8 @@
   export let showGallery = false
   export let showGlobalFeed = false
   export let uid = ''
+  export let darkTheme = false
+
   const auth = firebase.auth()
 
   onMount(async () => {
@@ -33,6 +35,11 @@
     window.localStorage.setItem('uid', '')
     alert("Session closed!\nCome back later!!!")
   }
+  
+  function toggleTheme() {
+    document.querySelector("html").classList.toggle("dark-theme")
+    darkTheme = !darkTheme
+  }
 
   const setUid = (newUid) => uid = newUid
 
@@ -45,12 +52,15 @@
       {setShowGallery}
       {setShowGlobalFeed}
       uid = "global"
+      {darkTheme}
     />
 
   {:else if showGallery}
     <Gallery 
       {setShowGallery}
       {uid}
+      {darkTheme}
+
     />
 
   {:else}
@@ -59,6 +69,8 @@
       {setShowGlobalFeed}
       {closeSession}
       {uid}
+      {darkTheme}
+      {toggleTheme}
     />
 
   {/if}

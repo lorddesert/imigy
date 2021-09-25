@@ -15,7 +15,6 @@
 }
 
 
-
 html, body {
 	position: relative;
 	width: 100%;
@@ -76,3 +75,4 @@ input:disabled {
 button {
 	font-weight: 600;
 }
+

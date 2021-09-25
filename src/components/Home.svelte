@@ -64,7 +64,16 @@
     </button>
   </div>
   
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <div style="display: grid; grid-gap: 1em">
+    <button class="button  is-medium is-dark" on:click={globalUpload}>Upload to the global profile</button>
+    <button class="button  is-medium " on:click={galleryUpload}>Upload </button>
+  </div>
+
+  {#if currentImage}
+    <img src={currentImage} alt="Something maybe"> 
+  {/if}
+  <!-- Validate the files in the server.  -->
+
 
   <input 
     id="galleryUpload" 
@@ -81,14 +90,7 @@
     style="display: none;"
     on:change={uploadGlobalImage}
   />
-  
-  <button class="button" on:click={galleryUpload}>Upload <strong>IMG</strong></button>
-  <button class="button" on:click={globalUpload}>Upload <strong>IMG</strong> to the global profile</button>
-  
-  {#if currentImage}
-    <img src={currentImage} alt="Something maybe"> 
-  {/if}
-  <!-- Validate the files in the server.  -->
+
 </main>
 
 <style>

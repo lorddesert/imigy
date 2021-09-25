@@ -54,7 +54,7 @@
   })
 </script>
 
-<button on:click={returnHome}>Return home</button>
+<button class="button is-rounded is-medium" style="margin: 1em;" on:click={returnHome}>Return home</button>
 
 <h1 class="block">{uid === "global" ? title.global : title.gallery}</h1>
 {#each images as img}

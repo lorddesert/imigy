@@ -65,8 +65,8 @@
   </div>
   
   <div style="display: grid; grid-gap: 1em">
-    <button class="button  is-medium is-dark" on:click={globalUpload}>Upload to the global profile</button>
-    <button class="button  is-medium " on:click={galleryUpload}>Upload </button>
+    <button class="button  is-medium is-primary" on:click={globalUpload}>Upload to the global feed</button>
+    <button class="button  is-medium " on:click={galleryUpload}>Upload</button>
   </div>
 
   {#if currentImage}

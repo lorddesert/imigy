@@ -106,4 +106,8 @@
     max-width: 100%;
   }
 
+  .orange {
+    background: var(--orange)
+  }
+
 </style>

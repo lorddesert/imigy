@@ -6,7 +6,7 @@ import App from './components/App.svelte'
 // import 'https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js'
 import { initializeApp } from 'firebase/app';
 
-  var firebaseConfig = {
+  const firebaseConfig = {
     apiKey: "AIzaSyCOP9rpHYSA465DReJ0AnhFQTXVpqFYSQI",
     authDomain: "imigy-5baee.firebaseapp.com",
     projectId: "imigy-5baee",

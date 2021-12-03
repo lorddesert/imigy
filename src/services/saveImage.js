@@ -5,11 +5,6 @@ export default async function saveImage(imagesRef, file, uid, global = false) {
       if (global) uid = "global"
       
       const destiny = ref(imagesRef.storage, `images/${uid}/${file.name}`)
-      
-      const metadata = {
-        contentType: 'image/jpeg',
-        name: file.name,
-      };
 
       await uploadBytes(destiny, file)
 

@@ -4,21 +4,24 @@
   import Gallery from './Gallery.svelte'
   import Login from './Login.svelte'
   import ThemeSwitch from './ThemeSwitch.svelte'
+  import { getAuth } from 'firebase/auth'
+  import { getApp } from 'firebase/app'
   
   export let showGallery = false
   export let showGlobalFeed = false
   export let uid = ''
   export let darkTheme = false
 
-  const auth = firebase.auth()
+  const auth = getAuth(getApp())
+  const currentUser = auth.currentUser
 
   onMount(async () => {
         const thereIsUid = window.localStorage.getItem('uid')
 
         if (thereIsUid) {
           setUid(thereIsUid) // This is bad nomenclature. Sorry.
-        } else if(auth.currentUser) {
-          setUid(auth.currentUser.uid)
+        } else if(currentUser) {
+          setUid(currentUser.uid)
         }
     
   })

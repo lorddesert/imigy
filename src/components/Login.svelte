@@ -1,15 +1,15 @@
 <script>
 import { onMount } from "svelte";
-
+import { getApp } from 'firebase/app'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 
     // export let setUserIsOnline
     export let setUid
 
     let showLogin = true
     let passwordInput = "password"
-
-    const auth = firebase.auth();
-
+    const app = getApp()
+    const auth = getAuth(app)
 
     async function login(e) {
         try {
@@ -19,7 +19,7 @@ import { onMount } from "svelte";
             const email = e.target[0].value
             const password = e.target[1].value
             
-            await auth.signInWithEmailAndPassword(email, password)
+            await signInWithEmailAndPassword(auth, email, password)
 
             if (rememberMe) window.localStorage.setItem('uid', auth.currentUser.uid)
 
@@ -62,7 +62,7 @@ import { onMount } from "svelte";
             const email = e.target[0].value
             const password = e.target[1].value
     
-           await auth.createUserWithEmailAndPassword(email, password)
+           await createUserWithEmailAndPassword(email, password)
            if (rememberMe) window.localStorage.setItem('uid', auth.currentUser.uid)
 
 

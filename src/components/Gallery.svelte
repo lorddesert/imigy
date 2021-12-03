@@ -1,5 +1,7 @@
 <script>
   import { onMount } from 'svelte'
+  import { getApp } from '@firebase/app';
+  import { getStorage, ref, listAll,getDownloadURL } from '@firebase/storage'
 
   // State
   export let setShowGallery
@@ -13,11 +15,15 @@
     global: "Global Feed"
   }
 
-  let imagesRef = firebase.storage().ref().child(`images/${uid}/`)
+  const firebase = getApp()
+  const storage = getStorage(firebase)
+
+  let imagesRef = ref(storage, `images/${uid}/`)
+  console.log(imagesRef)
 
   async function listImages () {
     try {
-      let res = await imagesRef.listAll()
+      let res = await listAll(imagesRef)
       res.items.forEach( async itemRef => {
         let img = {}
 
@@ -25,7 +31,7 @@
         let name = itemRef.name.replace(regex, '')
         name = name.replace(/(-|_)/g, ' ')
         img.name = name
-        img.URL = await itemRef.getDownloadURL()
+        img.URL = await getDownloadURL(itemRef)
 
         images = [...images, img]
       });

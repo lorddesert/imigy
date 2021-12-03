@@ -1,7 +1,8 @@
 
 <script>
     import saveImage from '../services/saveImage.js'
-  
+    import { getApp } from 'firebase/app'
+    import { getStorage, ref } from 'firebase/storage'
     // State
     export let setShowGallery
     export let closeSession
@@ -9,8 +10,8 @@
     export let setShowGlobalFeed
     export let darkTheme
   
-    let storage = firebase.storage()
-    let imageStorage = storage.ref('images/')
+    const storage = getStorage(getApp())
+    let imageStorage = ref(storage, 'images/')
       
     let currentImage
   
@@ -25,6 +26,7 @@
   
     async function uploadImage(e, uploadToGlobal = false) {
       const file = e.target.files[0]
+      console.log(file)
       const uploadTarget = uploadToGlobal ? "global" : uid
   
       /* We show a preview of the image */

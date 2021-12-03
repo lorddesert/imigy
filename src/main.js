@@ -1,7 +1,11 @@
 import App from './components/App.svelte'
+// import 'https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js'
+// import 'https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js0'
+// import 'https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js'
+// import 'https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js'
+// import 'https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js'
+import { initializeApp } from 'firebase/app';
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
     apiKey: "AIzaSyCOP9rpHYSA465DReJ0AnhFQTXVpqFYSQI",
     authDomain: "imigy-5baee.firebaseapp.com",
@@ -12,14 +16,11 @@ import App from './components/App.svelte'
     measurementId: "G-6QFR6WL4G3"
   };
   // Initialize Firebase
-  let fapp = !firebase.apps.length
-  ? firebase.initializeApp(firebaseConfig)
-  : firebase.app();
+  let app = initializeApp(firebaseConfig)
   // firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
 
-const app = new App({
+const Main = new App({
 	target: document.body,
 });
 
-export default app;
+export default Main;

@@ -121,11 +121,6 @@
   header h1 {
     grid-column: 2/3;
   }
-
-  label {
-    margin-right: 2em;
-  }
-
   img {
     max-width: 100%;
   }

@@ -199,7 +199,4 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } f
         height: 18px;
     }
 
-    a {
-        text-align: center;
-    }
 </style>

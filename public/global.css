@@ -85,3 +85,17 @@ button {
 	font-weight: 600;
 }
 
+
+.list {
+    display: flex !important;
+	justify-content: space-evenly;
+    gap: 2rem;
+	padding: 1em !important;
+  }
+
+.list img {
+	max-width: 35% !important;
+	padding: 0 !important;
+	min-width: 120px;
+}
+

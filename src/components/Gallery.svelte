@@ -9,6 +9,7 @@
   export let uid
   export let setShowGlobalFeed
   export let darkTheme
+  let listViewMode = false
 
   let images = []
   let title = {
@@ -56,6 +57,29 @@
 
   }
 
+  async function copyLink(e, URL, name) {
+    await navigator.clipboard.writeText(`${name}\n\n\n${URL}`)
+    const copyBtn = e.target
+    copyBtn.classList.toggle('is-danger')
+    copyBtn.classList.toggle('is-success')
+    copyBtn.innerHTML="Copied!"
+    setTimeout(() => {
+      copyBtn.classList.toggle('is-danger')
+      copyBtn.classList.toggle('is-success')
+      copyBtn.innerHTML="Copy"
+    }, 1200);
+  }
+
+  function switchView() {
+    const posts = document.querySelector('#posts')
+    const list = document.querySelector('#list')
+
+    document.querySelectorAll('figure').forEach(figure => figure.classList.toggle('list'))
+    posts.classList.toggle('selected')
+    list.classList.toggle('selected')
+    listViewMode = !listViewMode
+  }
+
   onMount(async () => {
     await listImages()
     await checkIfThereIsImages()
@@ -67,23 +91,26 @@
 <h1 class="block">{uid === "global" ? title.global : title.gallery}</h1>
 <main class="supergrid">
   <aside>
-    <ul>
-      <li>Post view <Switch nonTheme /></li>
-      <br>
-      <li>List view<Switch nonTheme /></li>
-    </ul>
+    <h3 class="is-$white">View</h3>
+    <p class="view-switch">
+      <span id="posts" class="selected">Posts</span> <Switch nonTheme action={switchView} /> <span id="list" class="">List</span>
+    </p>
   </aside>
-  <div>
 
   {#each images as img}
   <figure>
     <img src={img.URL} alt={`${img.name}`} loading="lazy">
-    <figcaption>{img.name}</figcaption>
+    <figcaption>
+      {img.name}
+      {#if listViewMode}
+      <button class="copyBtn button is-medium {darkTheme ? "is-danger" : ''}" style="margin: 1em;" on:click={(e) => copyLink(e, img.URL, img.name)}>Copy</button>
+
+      {/if}
+    </figcaption>
   </figure>
   {:else}
   <p id="loader">Loading _>:P)...</p>
   {/each}
-</div>
 
 </main>
   
@@ -96,10 +123,6 @@
     text-align: center;
   }
 
-  .supergrid {
-    display: grid;
-    grid-template-columns: auto 1fr;
-  }
 
   #loader {
     display: grid;
@@ -112,6 +135,8 @@
   img {
     max-width: 100%;
     padding: 2em 0;
+    transition: all ease 150ms; 
+
   }
   
   figure {
@@ -125,26 +150,46 @@
 
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
     padding: 2em;
-    background-color: var(--card-background);
-    
+    background-color: var(--card-background);    
 
   }
-
   figure:not(:last-child) {
     margin-bottom: 2em;
   }
   figcaption {
+    display:flex;
+    place-items: center;
     font-size: 1.3rem;
     color: var(--card-font-color);
   }
 
   aside {
     margin-left: 20px;
-  }
-  li {
     color: white;
+  }
+
+  span {
+    transition: all ease 400ms;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  span:not(.selected) {
+    color: var(--card-background);
+  }
+
+  .view-switch {
     display: flex;
-    gap: 1em;
+    gap: .5em; 
+  }
+
+  .selected {
+    font-weight: bold;
+    color: crimson;
+  }
+
+  .copyBtn {
+    transition: all ease 150ms;
   }
 
 @media screen and (max-width: 480px) {

@@ -154,8 +154,8 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } f
         </section>
 
         <section class="password-container checkbox">
-            <label class="checkbox" for="check">
-                <input type="checkbox" name="check" on:change={changePasswordType}>
+            <label class="checkbox" for="rememberMe">
+                <input type="checkbox" name="rememberMe" >
                 Remember me
             </label>
         </section>

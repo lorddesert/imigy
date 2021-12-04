@@ -79,10 +79,8 @@
   </div>
 
   {#if currentImage}
-    <img src={currentImage} alt="Something maybe"> 
+    <p class="subtitle  success" style="">Image uploaded! <strong class="title  success">See the preview below!</strong> </p>
   {/if}
-  <!-- Validate the files in the server.  -->
-
 
   <input 
     id="galleryUpload" 
@@ -102,8 +100,15 @@
 
 </main>
 
+{#if currentImage}
+  <img src={currentImage} alt="Something maybe"> 
+{/if}
+
 <style>
 
+.success {
+  color: hsl(171, 100%, 41%);
+}
     main {
     display: grid;
     place-items: center;

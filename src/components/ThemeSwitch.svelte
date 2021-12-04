@@ -5,7 +5,7 @@ export let toggleTheme
 
 <div class="switch-container">
     <label class="switch">
-        <input type="checkbox" on:change={toggleTheme}>
+        <input type="checkbox" id="themeSlider" on:change={toggleTheme}>
         <span class="slider round"></span>
     </label>
 </div>

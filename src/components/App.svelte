@@ -17,9 +17,14 @@
 
   onMount(async () => {
         const thereIsUid = window.localStorage.getItem('uid')
+        const themePreference = window.localStorage.getItem('theme')
 
         if (thereIsUid) {
           setUid(thereIsUid) // This is bad nomenclature. Sorry.
+
+          if (themePreference) {
+            document.querySelector("#themeSlider").click()
+          }
         } else if(currentUser) {
           setUid(currentUser.uid)
         }
@@ -45,11 +50,19 @@
   function toggleTheme() {
     document.querySelector("html").classList.toggle("dark-theme")
     darkTheme = !darkTheme
+
+    darkTheme ? window.localStorage.setItem('theme', 'dark-theme') :  window.localStorage.setItem('theme', '')
   }
+  function toggleNebulaTheme() {
+    document.querySelector("html").classList.toggle("nebula-theme")
+    darkTheme = !darkTheme
+  }
+  
+
 
 </script>
 
-<ThemeSwitch {toggleTheme} />
+<ThemeSwitch {toggleTheme} {toggleNebulaTheme}/>
 {#if uid}
 
   {#if showGlobalFeed}

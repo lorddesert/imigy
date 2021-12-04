@@ -14,6 +14,14 @@
 	--background-color: hsl(0, 0%, 5%);
 }
 
+.nebula-theme {
+	--font-color: #fff;
+	--card-font-color: #fff;
+	--background-color:  linear-gradient(135deg, #00DBDE 0%, #FC00FF 100%);
+	--card-background: white;
+	
+}
+
 
 html, body {
 	position: relative;
@@ -37,7 +45,8 @@ h1 {
 	font-family: var(--font-family);
 	color: var(--font-color);
 	text-transform: uppercase;
-	font-size: 4em !important;
+	font-size: clamp(3em, 10vw, 4em) !important;
+
 	font-weight: 600;
 }
 

@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { getApp } from '@firebase/app';
   import { getStorage, ref, listAll,getDownloadURL } from '@firebase/storage'
+  import Switch from './Switch.svelte'
 
   // State
   export let setShowGallery
@@ -63,17 +64,29 @@
 </script>
 
 <button class="button is-rounded is-medium {darkTheme ? "is-dark" : ''}" style="margin: 1em;" on:click={returnHome}>Return home</button>
-
 <h1 class="block">{uid === "global" ? title.global : title.gallery}</h1>
-{#each images as img}
+<main class="supergrid">
+  <aside>
+    <ul>
+      <li>Post view <Switch nonTheme /></li>
+      <br>
+      <li>List view<Switch nonTheme /></li>
+    </ul>
+  </aside>
+  <div>
+
+  {#each images as img}
   <figure>
     <img src={img.URL} alt={`${img.name}`} loading="lazy">
     <figcaption>{img.name}</figcaption>
   </figure>
-{:else}
+  {:else}
   <p id="loader">Loading _>:P)...</p>
-{/each}
+  {/each}
+</div>
 
+</main>
+  
 
 <!-- this block renders when photos.length === 0 -->
 
@@ -81,6 +94,11 @@
 
   h1 {
     text-align: center;
+  }
+
+  .supergrid {
+    display: grid;
+    grid-template-columns: auto 1fr;
   }
 
   #loader {
@@ -118,6 +136,15 @@
   figcaption {
     font-size: 1.3rem;
     color: var(--card-font-color);
+  }
+
+  aside {
+    margin-left: 20px;
+  }
+  li {
+    color: white;
+    display: flex;
+    gap: 1em;
   }
 
 @media screen and (max-width: 480px) {

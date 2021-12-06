@@ -2,9 +2,11 @@
 import { onMount } from "svelte";
 import { getApp } from 'firebase/app'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { fade, fly  } from 'svelte/transition';
 
     // export let setUserIsOnline
     export let setUid
+    let visible = false
 
     let showLogin = true
     let passwordInput = "password"
@@ -56,6 +58,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } f
     }
     async function register(e) {
         try {
+            alert('BAD')
             e.preventDefault()
 
             const rememberMe = e.target[3].checked;
@@ -96,6 +99,10 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } f
         }
     }
 
+    onMount(() => {
+        visible = true
+    })
+
     let changeForm = () => showLogin = !showLogin
     let changePasswordType = () => passwordInput === "password" ? passwordInput = "text" :  passwordInput = "password"
 
@@ -103,7 +110,8 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } f
 
 {#if !showLogin}
     <form method="POST" on:submit={register}>
-        <h1>Imigy</h1>
+        {#if visible}
+        <h1 transition:fly="{{ y: -50, duration: 300 }}">Imigy</h1>
         
         <section class="field">
             <label class="label" for="username">Email</label>
@@ -129,39 +137,42 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } f
             </label>
         </section>
 
-        <button class="button is-medium is-danger" type="submit">Register</button>
-        <button class="button is-ghost" on:click={changeForm}>Already have an account?</button>
+        <button class="button is-medium is-danger" type="submit" >Register</button>
+        <button class="button is-ghost" type="button" on:click={changeForm}>Already have an account?</button>
+        {/if}
     </form>
 {:else}
     <form  action="" on:submit={login}>
-        <h1>Imigy</h1>
+        {#if visible}            
+          <h1 in:fly="{{delay: 350, duration: 300}}">Imigy</h1>
 
-        <section class="field">
-            <label class="label" for="username">Email</label>
-            <input class="input control" type="text" name="username"/>
-        </section>
+          <section class="field">
+              <label class="label" for="username">Email</label>
+              <input class="input control" type="text" name="username"/>
+          </section>
 
-        <section class="field">
-            <label class="label" for="password">Password</label>
-            <input class="input control"  type={`${passwordInput}`} name="password"/>
-        </section>
+          <section class="field">
+              <label class="label" for="password">Password</label>
+              <input class="input control"  type={`${passwordInput}`} name="password"/>
+          </section>
 
-        <section class="password-container checkbox" >
-            <label class="checkbox" for="check">
-                <input  type="checkbox" name="check" on:change={changePasswordType}>
-                Show password
-            </label>
-        </section>
+          <section class="password-container checkbox">
+              <label class="checkbox" for="check">
+                  <input  type="checkbox" name="check" on:change={changePasswordType}>
+                  Show password
+              </label>
+          </section>
 
-        <section class="password-container checkbox">
-            <label class="checkbox" for="rememberMe">
-                <input type="checkbox" name="rememberMe" >
-                Remember me
-            </label>
-        </section>
+          <section class="password-container checkbox">
+              <label class="checkbox" for="rememberMe">
+                  <input type="checkbox" name="rememberMe" >
+                  Remember me
+              </label>
+          </section>
 
-        <button class="button is-medium is-danger" type="submit">Login</button>
-        <button class="button is-ghost" on:click={changeForm}>Don't have an account?</button>
+          <button class="button is-medium is-danger" type="submit">Login</button>
+          <button class="button is-ghost" type="button" on:click={changeForm}>Don't have an account?</button>
+        {/if}
     </form>
 {/if}
 

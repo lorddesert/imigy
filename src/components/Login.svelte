@@ -13,6 +13,8 @@ import { fade, fly  } from 'svelte/transition';
     const app = getApp()
     const auth = getAuth(app)
 
+    const defaultTransition = "{{y: -50, delay: 350, duration: 300}}"
+
     async function login(e) {
         try {
             e.preventDefault()
@@ -111,66 +113,66 @@ import { fade, fly  } from 'svelte/transition';
 {#if !showLogin}
     <form method="POST" on:submit={register}>
         {#if visible}
-        <h1 transition:fly="{{ y: -50, duration: 300 }}">Imigy</h1>
+        <h1 in:fly="{{ y: -50, delay: 150, duration: 300 }}">Imigy</h1>
         
-        <section class="field">
+        <section class="field" in:fly="{{y: -25, delay: 350, duration: 300}}">
             <label class="label" for="username">Email</label>
             <input class="control input" type="text" name="username" autocomplete="email"/>
         </section>
 
-        <section class="field">
+        <section class="field" in:fly="{{y: -25, delay: 400, duration: 300}}">
             <label class="label" for="password">Password</label>
             <input class="control input" type={`${passwordInput}`} name="password"/>
         </section>
 
-        <section class="password-container checkbox">
+        <section class="password-container checkbox" in:fly="{{y: -25, delay: 450, duration: 300}}">
             <label for="check">
                 <input  type="checkbox" name="check" on:change={changePasswordType}>
                 Show password
             </label>
         </section>
 
-        <section class="password-container checkbox">
+        <section class="password-container checkbox" in:fly="{{y: -25, delay: 450, duration: 300}}">
             <label class="label" for="check">
                 <input  type="checkbox" name="check" />
                 Remember me
             </label>
         </section>
 
-        <button class="button is-medium is-danger" type="submit" >Register</button>
+        <button class="button is-medium is-danger" type="submit" in:fly="{{y: -25, delay: 450, duration: 300}}">Register</button>
         <button class="button is-ghost" type="button" on:click={changeForm}>Already have an account?</button>
         {/if}
     </form>
 {:else}
     <form  action="" on:submit={login}>
         {#if visible}            
-          <h1 in:fly="{{delay: 350, duration: 300}}">Imigy</h1>
+          <h1 in:fly="{{y: -50, delay: 150, duration: 300}}">Imigy</h1>
 
-          <section class="field">
+          <section class="field" in:fly="{{y: -25, delay: 300, duration: 300}}">
               <label class="label" for="username">Email</label>
               <input class="input control" type="text" name="username"/>
           </section>
 
-          <section class="field">
+          <section class="field" in:fly="{{y: -25, delay: 400, duration: 300}}">
               <label class="label" for="password">Password</label>
               <input class="input control"  type={`${passwordInput}`} name="password"/>
           </section>
 
-          <section class="password-container checkbox">
+          <section class="password-container checkbox" in:fly="{{y: -25, delay: 450, duration: 300}}">
               <label class="checkbox" for="check">
                   <input  type="checkbox" name="check" on:change={changePasswordType}>
                   Show password
               </label>
           </section>
 
-          <section class="password-container checkbox">
+          <section class="password-container checkbox" in:fly="{{y: -25, delay: 450, duration: 300}}">
               <label class="checkbox" for="rememberMe">
                   <input type="checkbox" name="rememberMe" >
                   Remember me
               </label>
           </section>
 
-          <button class="button is-medium is-danger" type="submit">Login</button>
+          <button class="button is-medium is-danger" type="submit" in:fly="{{y: -25, delay: 450, duration: 300}}">Login</button>
           <button class="button is-ghost" type="button" on:click={changeForm}>Don't have an account?</button>
         {/if}
     </form>

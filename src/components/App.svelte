@@ -3,12 +3,15 @@
   import Home from './Home.svelte'
   import Gallery from './Gallery.svelte'
   import Login from './Login.svelte'
+  import Profile from './Profile.svelte'
   import ThemeSwitch from './ThemeSwitch.svelte'
   import { getAuth } from 'firebase/auth'
   import { getApp } from 'firebase/app'
   
   export let showGallery = false
   export let showGlobalFeed = false
+  export let showProfile = false
+
   export let uid = ''
   export let darkTheme = false
 
@@ -39,13 +42,22 @@
     showGlobalFeed = !showGlobalFeed
   }
 
+  function setShowProfile() {
+    showProfile = !showProfile
+    showGallery = false
+    showGlobalFeed = false
+
+  }
+  
   function closeSession() {
     setUid('')
     window.localStorage.setItem('uid', '')
     alert("Session closed!\nCome back later!!!")
   }
 
-  const setUid = (newUid) => uid = newUid
+ function setUid (newUid) {
+   uid = newUid
+  }
 
   function toggleTheme() {
     document.querySelector("html").classList.toggle("dark-theme")
@@ -58,6 +70,9 @@
     darkTheme = !darkTheme
   }
   
+
+
+
 
 
 </script>
@@ -82,6 +97,8 @@
 
     />
 
+  {:else if showProfile}
+    <Profile />
   {:else}
     <Home 
       {setShowGallery}

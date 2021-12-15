@@ -2,7 +2,8 @@
   import { onMount } from 'svelte'
   import { getApp } from '@firebase/app';
   import { getStorage, ref, listAll,getDownloadURL } from '@firebase/storage'
-  import Switch from './Switch.svelte'
+  import ViewController from './ViewController.svelte'
+  
 
   // State
   export let setShowGallery
@@ -90,12 +91,14 @@
 <button class="button is-rounded is-medium {darkTheme ? "is-dark" : ''}" style="margin: 1em;" on:click={returnHome}>Return home</button>
 <h1 class="block">{uid === "global" ? title.global : title.gallery}</h1>
 <main class="supergrid">
-  <aside>
+  <!-- <aside>
     <h3 class="is-$white">View</h3>
     <p class="view-switch">
       <span id="posts" class="selected">Posts</span> <Switch nonTheme action={switchView} /> <span id="list" class="">List</span>
     </p>
-  </aside>
+  </aside> -->
+
+  <ViewController {switchView}/>
 
   {#each images as img}
   <figure>
@@ -163,7 +166,7 @@
     color: var(--card-font-color);
   }
 
-  aside {
+  /* aside {
     margin-left: 20px;
     color: white;
   }
@@ -186,7 +189,7 @@
   .selected {
     font-weight: bold;
     color: crimson;
-  }
+  } */
 
   .copyBtn {
     transition: all ease 150ms;

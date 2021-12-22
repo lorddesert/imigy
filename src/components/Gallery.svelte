@@ -3,8 +3,7 @@
   import { getApp } from "@firebase/app";
   import { getStorage, ref, listAll, getDownloadURL } from "@firebase/storage";
   import ViewController from "./ViewController.svelte";
-  import { getFirestore, addDoc, collection } from "firebase/firestore";
-
+  import { doc, setDoc, getFirestore } from "firebase/firestore"; 
   // State
   export let setShowGallery;
   export let uid;
@@ -83,14 +82,14 @@
 
   async function postImagesOnDB() {
     const db = getFirestore()
-
     try {
-      const docRef = await addDoc(collection(db, `${uid}`), images)
-      console.log("Document written with ID: ", docRef.id)
+      const userRef = doc(db, 'users', uid);
+      await setDoc(userRef, {images});
       alert('DONE!')
-    } catch (e) {
-      alert('NOT DONE!')
-      console.error("Error adding document: ", e)
+
+    } catch (error) {
+      alert(`ERROR:\n ${error}`)
+      console.error(error)
     }
   }
 

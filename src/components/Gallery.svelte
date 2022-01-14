@@ -107,7 +107,7 @@
 <button
   class="button is-rounded is-medium {darkTheme ? 'is-dark' : ''}"
   style="margin: 1em;"
-  on:click={postImagesOnDB}>Post images</button
+  on:click={postImagesOnDB}>Post images to the DB</button
 >
 <h1 class="block">{uid === "global" ? title.global : title.gallery}</h1>
 <main class="supergrid">

@@ -78,8 +78,8 @@
 </script>
 
 <ThemeSwitch {toggleTheme} {toggleNebulaTheme}/>
-<Profile />
 {#if uid}
+<Profile setShowGallery={setShowGallery}/>
 
   {#if showGlobalFeed}
     <Gallery 

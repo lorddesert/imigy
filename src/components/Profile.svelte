@@ -1,8 +1,9 @@
 <script>
+    export let setShowGallery
 </script>
 
 <header>
-    <div id="profile-image">
+    <div id="profile-image" on:click={setShowGallery}>
         <img src="/favicon.png" alt="profile" />
     </div>
     <form on:submit={() => alert('asdasd')}>

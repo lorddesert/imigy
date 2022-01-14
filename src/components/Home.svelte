@@ -3,6 +3,7 @@
     import saveImage from '../services/saveImage.js'
     import { getApp } from 'firebase/app'
     import { getStorage, ref } from 'firebase/storage'
+
     // State
     export let setShowGallery
     export let closeSession
@@ -51,7 +52,6 @@
   </script>
 
 <main>
-
 <!-- Rounded switch -->
 
 <header>
@@ -97,7 +97,6 @@
     style="display: none;"
     on:change={uploadGlobalImage}
   />
-
 </main>
 
 {#if currentImage}
@@ -109,6 +108,7 @@
 .success {
   color: hsl(171, 100%, 41%);
 }
+
     main {
     display: grid;
     place-items: center;

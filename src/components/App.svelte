@@ -78,6 +78,7 @@
 </script>
 
 <ThemeSwitch {toggleTheme} {toggleNebulaTheme}/>
+<Profile />
 {#if uid}
 
   {#if showGlobalFeed}

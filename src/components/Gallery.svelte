@@ -211,7 +211,7 @@
     transition: all ease 150ms;
   }
 
-  @media screen and (min-width: 480px) {
+  @media (max-width: 600px) {
     img {
       max-width: 100%;
     }

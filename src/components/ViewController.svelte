@@ -40,8 +40,4 @@
     color: crimson;
   }
 
-  .copyBtn {
-    transition: all ease 150ms;
-  }
-
 </style>

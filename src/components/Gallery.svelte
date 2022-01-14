@@ -211,18 +211,22 @@
     transition: all ease 150ms;
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (min-width: 480px) {
     img {
       max-width: 100%;
     }
 
     figure {
-      margin: 0 !important;
+      margin: 0  0 2em 0 !important;
       max-width: 100%;
+      width: 100vw;
     }
 
     img:not(:last-of-type) {
       margin-bottom: 2em;
+    }
+    .list { 
+      margin-bottom: 3em;
     }
   }
 </style>

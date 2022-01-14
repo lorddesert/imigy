@@ -79,7 +79,7 @@
 
 <ThemeSwitch {toggleTheme} {toggleNebulaTheme}/>
 {#if uid}
-<Profile setShowGallery={setShowGallery}/>
+<!-- <Profile setShowGallery={setShowGallery}/> -->
 
   {#if showGlobalFeed}
     <Gallery 

@@ -67,7 +67,7 @@ import { fade, fly  } from 'svelte/transition';
             const email = e.target[0].value
             const password = e.target[1].value
     
-           await createUserWithEmailAndPassword(email, password)
+           await createUserWithEmailAndPassword(auth, email, password)
            if (rememberMe) window.localStorage.setItem('uid', auth.currentUser.uid)
 
 

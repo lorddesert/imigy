@@ -6,10 +6,12 @@ export default async function saveImage(imagesRef, file, uid, global = false) {
       
       const destiny = ref(imagesRef.storage, `images/${uid}/${file.name}`)
 
-      await uploadBytes(destiny, file)
+      const response = await uploadBytes(destiny, file)
 
       console.log('File uploaded!');
       alert('File uploaded')
+      
+      return response
     } catch (error) {
       console.log(error)
       alert(`Ups, something happened: ${error}\n

@@ -14,6 +14,7 @@
 
   export let uid = ''
   export let darkTheme = false
+  export let serverImages
 
   const auth = getAuth(getApp())
   const currentUser = auth.currentUser
@@ -31,7 +32,6 @@
         } else if(currentUser) {
           setUid(currentUser.uid)
         }
-    
   })
 
   function setShowGallery() {
@@ -69,11 +69,6 @@
     document.querySelector("html").classList.toggle("nebula-theme")
     darkTheme = !darkTheme
   }
-  
-
-
-
-
 
 </script>
 
@@ -95,6 +90,7 @@
       {setShowGallery}
       {uid}
       {darkTheme}
+      {serverImages}
 
     />
 
@@ -107,6 +103,7 @@
       {closeSession}
       {uid}
       {darkTheme}
+      {serverImages}
     />
 
   {/if}

@@ -3,12 +3,13 @@
   import { getApp } from "@firebase/app";
   import { getStorage, ref, listAll, getDownloadURL } from "@firebase/storage";
   import ViewController from "./ViewController.svelte";
-  import { doc, setDoc, getFirestore } from "firebase/firestore"; 
+  import { doc, collection, setDoc, getFirestore, arrayUnion } from "firebase/firestore"; 
   // State
   export let setShowGallery;
   export let uid;
   export let setShowGlobalFeed;
   export let darkTheme;
+  export let serverImages
   let listViewMode = false;
 
   let images = [];
@@ -82,9 +83,12 @@
   async function postImagesOnDB() {
     const db = getFirestore()
     try {
-      const userRef = doc(db, 'users', uid);
-      await setDoc(userRef, {images});
-      alert('DONE!')
+      const imgs = arrayUnion(...images)
+            
+      if (imgs.Qa.length) {
+        await setDoc(doc(db, `users/${uid}/`), {imgs})
+        alert('DONE!')
+      }
 
     } catch (error) {
       alert(`ERROR:\n ${error}`)

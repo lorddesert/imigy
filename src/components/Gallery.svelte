@@ -21,7 +21,6 @@
   const storage = getStorage(firebase);
 
   let imagesRef = ref(storage, `images/${uid}/`);
-  console.log(imagesRef);
 
   async function listImages() {
     try {

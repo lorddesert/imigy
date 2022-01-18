@@ -9,7 +9,6 @@
   export let uid;
   export let setShowGlobalFeed;
   export let darkTheme;
-  export let serverImages
   let listViewMode = false;
 
   let images = [];
@@ -228,6 +227,7 @@
     img:not(:last-of-type) {
       margin-bottom: 2em;
     }
+    
     .list { 
       margin-bottom: 3em;
     }

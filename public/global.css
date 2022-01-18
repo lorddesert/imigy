@@ -39,6 +39,7 @@ body {
 	padding: 0 !important;
 	padding: 8px;
 	box-sizing: border-box;
+	min-height: 100vh;
 }
 body button {
 	transition: all ease 200ms;

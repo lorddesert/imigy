@@ -2,7 +2,9 @@
 <script>
     import saveImage from '../services/saveImage.js'
     import { getApp } from 'firebase/app'
-    import { getStorage, ref } from 'firebase/storage'
+    import { getStorage, ref, getDownloadURL } from "@firebase/storage";
+    import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore'
+    import { onMount } from 'svelte';
 
     // State
     export let setShowGallery
@@ -10,12 +12,18 @@
     export let uid
     export let setShowGlobalFeed
     export let darkTheme
+    export let serverImages
   
     const storage = getStorage(getApp())
     let imageStorage = ref(storage, 'images/')
       
     let currentImage
-  
+    const db = getFirestore()
+
+    
+  onMount(async () => {
+    await getImages()
+  })
   
     function galleryUpload() {
       document.querySelector('#galleryUpload').click()
@@ -26,16 +34,26 @@
     }
   
     async function uploadImage(e, uploadToGlobal = false) {
+      try {
+
       const file = e.target.files[0]
-      console.log(file)
       const uploadTarget = uploadToGlobal ? "global" : uid
   
       /* We show a preview of the image */
       currentImage = window.URL.createObjectURL(e.target.files[0])
 
       // We need to finish the global post feed upload.
-      await saveImage(imageStorage, file, uploadTarget)
+      const imageURL = await saveImage(imageStorage, file, uploadTarget)
+      await postImagesOnDB(file, imageURL)
+
+      alert('Done!')
+
+    } catch (error) {
+      alert(`ERROR:\n ${error}`)
+      console.error(error)
     }
+
+  }
 
     async function uploadGlobalImage(e) {
       try {
@@ -47,7 +65,30 @@
       }
     }
   
+    async function postImagesOnDB(image, imageURL) {
+      try {
+      const img = {
+        name: image.name,
+        URL: await getDownloadURL(imageURL.ref)
+      }
 
+      const imgs = [...serverImages, img]
+
+      if (serverImages.length)
+        setDoc(doc(db, `users/${uid}`), {imgs},)
+
+
+      // setDoc(doc(db, `users/${uid}`), {images: [img]}, {mergeWithFields: true})
+    } catch (error) {
+      alert(`ERROR:\n ${error}`)
+      console.error(error)
+    }
+  }
+
+  async function getImages() {
+    const response = await getDoc(doc(db, `users/${uid}`))
+    serverImages = await response.get('imgs')
+  }
   // lordvlaim
   </script>
 
@@ -80,6 +121,8 @@
 
   {#if currentImage}
     <p class="subtitle  success" style="">Image uploaded! <strong class="title  success">See the preview below!</strong> </p>
+  <!-- {:else}
+    <p class="title">Loading... >:P</p> -->
   {/if}
 
   <input 

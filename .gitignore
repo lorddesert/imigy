@@ -2,4 +2,6 @@
 /public/build/
 .vscode
 
+/src/components/Cobe.svelte
+
 .DS_Store

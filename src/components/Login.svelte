@@ -1,7 +1,7 @@
 <script>
 import { onMount } from "svelte";
 import { getApp } from 'firebase/app'
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
 import { fade, fly  } from 'svelte/transition';
 
     // export let setUserIsOnline
@@ -63,12 +63,19 @@ import { fade, fly  } from 'svelte/transition';
             alert('BAD')
             e.preventDefault()
 
-            const rememberMe = e.target[3].checked;
+            // console.log(e);
+            // return
+            const rememberMe = e.target[4].checked;
             const email = e.target[0].value
-            const password = e.target[1].value
+            const password = e.target[2].value
+            const nickname = e.target[1].value
     
            await createUserWithEmailAndPassword(auth, email, password)
            if (rememberMe) window.localStorage.setItem('uid', auth.currentUser.uid)
+
+           updateProfile(getAuth().currentUser, {
+               displayName: nickname
+           })
 
 
            alert('Registered succesfully!')
@@ -118,6 +125,11 @@ import { fade, fly  } from 'svelte/transition';
         <section class="field" in:fly="{{y: -25, delay: 350, duration: 300}}">
             <label class="label" for="username">Email</label>
             <input class="control input" type="text" name="username" autocomplete="email"/>
+        </section>
+
+        <section class="field" in:fly="{{y: -25, delay: 400, duration: 300}}">
+            <label class="label" for="nickname">Nickname</label>
+            <input class="control input" type="text" name="nickname"/>
         </section>
 
         <section class="field" in:fly="{{y: -25, delay: 400, duration: 300}}">
